@@ -1,0 +1,1513 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>БИЗНЕС ДРОП - ИИ Генератор Бизнес-Идей</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Black and white gradient effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, #333333 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, #666666 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, #444444 0%, transparent 50%);
+            opacity: 0.1;
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 98%, #ffffff 100%),
+                linear-gradient(180deg, transparent 98%, #cccccc 100%);
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 414px;
+            margin: 0 auto;
+            padding: 15px;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-top: 20px;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 36px;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ffffff, #cccccc, #888888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            letter-spacing: 3px;
+        }
+
+        .subtitle {
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .telegram-section {
+            background: linear-gradient(135deg, #111111 0%, #222222 100%);
+            border: 2px solid #ffffff;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+            box-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.2),
+                inset 0 0 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .telegram-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .telegram-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 18px;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+        }
+
+        .telegram-text {
+            color: #cccccc;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            position: relative;
+            z-index: 2;
+        }
+
+        .telegram-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(45deg, #333333, #666666);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .telegram-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
+            background: linear-gradient(45deg, #444444, #777777);
+        }
+
+        .subscription-check {
+            margin-top: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .check-btn {
+            background: linear-gradient(45deg, #666666, #888888);
+            border: none;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .check-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 15px rgba(255, 255, 255, 0.3);
+            background: linear-gradient(45deg, #777777, #999999);
+        }
+
+        .generations-counter {
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            border: 2px solid #ffffff;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .counter-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 16px;
+            color: #ffffff;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .counter-value {
+            font-size: 24px;
+            font-weight: 900;
+            font-family: 'Orbitron', monospace;
+            color: #ffffff;
+        }
+
+        .promo-section {
+            background: linear-gradient(135deg, #222222 0%, #111111 100%);
+            border: 2px solid #cccccc;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .promo-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 18px;
+            color: #cccccc;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .promo-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .promo-input {
+            flex: 1;
+            padding: 12px;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border: 2px solid #666666;
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 16px;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .promo-input:focus {
+            outline: none;
+            border-color: #ffffff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .promo-btn {
+            padding: 12px 20px;
+            background: linear-gradient(45deg, #666666, #888888);
+            border: none;
+            border-radius: 10px;
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .promo-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 15px rgba(255, 255, 255, 0.3);
+            background: linear-gradient(45deg, #777777, #999999);
+        }
+
+        .form-section {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            border: 1px solid #333333;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 
+                0 0 30px rgba(0, 0, 0, 0.8),
+                inset 0 0 20px rgba(255, 255, 255, 0.05);
+            opacity: 0.5;
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
+
+        .form-section.enabled {
+            opacity: 1;
+            pointer-events: all;
+            border-color: #ffffff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border: 2px solid #666666;
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 16px;
+            font-family: 'Rajdhani', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #ffffff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+        }
+
+        .form-input::placeholder {
+            color: #666666;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .radio-option {
+            flex: 1;
+            position: relative;
+        }
+
+        .radio-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .radio-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 10px;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border: 2px solid #666666;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 85px;
+            justify-content: center;
+        }
+
+        .radio-option input[type="radio"]:checked + .radio-label {
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            border-color: #ffffff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .radio-icon {
+            font-size: 22px;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .radio-text {
+            font-size: 12px;
+            text-align: center;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .generate-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(45deg, #ffffff, #cccccc, #888888);
+            border: none;
+            border-radius: 15px;
+            color: #000000;
+            font-size: 18px;
+            font-weight: 900;
+            font-family: 'Orbitron', monospace;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .generate-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .generate-btn:hover::before {
+            left: 100%;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.5);
+        }
+
+        .generate-btn:disabled {
+            background: #333333;
+            color: #666666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid #333333;
+            border-radius: 50%;
+            border-top-color: #ffffff;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 15px;
+            color: #ffffff;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .results {
+            display: none;
+        }
+
+        .idea-card {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            border: 2px solid #ff0000;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .idea-number {
+            position: absolute;
+            top: 17px;
+            left: 17px;
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(45deg, #ff0000, #ff3333);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-family: 'Orbitron', monospace;
+            color: #ffffff;
+            font-size: 14px;
+            z-index: 10;
+        }
+
+        .idea-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #ff0000, #ff3333, #ff6666);
+        }
+
+        .idea-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.4);
+            border-color: #ff3333;
+        }
+
+        .idea-rating {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid #ffffff;
+        }
+
+        .rating-badge {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .rating-badge.easy { background: #4CAF50; color: #000; }
+        .rating-badge.normal { background: #FF9800; color: #000; }
+        .rating-badge.hard { background: #F44336; color: #fff; }
+        .rating-badge.trendy { background: #E91E63; color: #fff; }
+
+        .idea-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .idea-description {
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 18px;
+            font-size: 14px;
+        }
+
+        .idea-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .metric {
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            border: 1px solid #ffffff;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .metric-label {
+            font-size: 11px;
+            color: #ffffff;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .metric-value {
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'Orbitron', monospace;
+            color: #ffffff;
+        }
+
+        .details-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, #333333, #666666);
+            border: 1px solid #ffffff;
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Rajdhani', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .details-btn:hover {
+            background: linear-gradient(45deg, #444444, #777777);
+            transform: translateY(-1px);
+            box-shadow: 0 3px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .idea-details {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #333333;
+        }
+
+        .idea-details.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .detail-section {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border: 1px solid #333333;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .detail-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 14px;
+            color: #ffffff;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .detail-content {
+            color: #cccccc;
+            line-height: 1.5;
+            font-size: 13px;
+        }
+
+        .detail-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .detail-list li {
+            padding: 3px 0;
+            color: #cccccc;
+            font-size: 12px;
+        }
+
+        .detail-list li::before {
+            content: '▶ ';
+            color: #ffffff;
+            margin-right: 5px;
+        }
+
+        .error {
+            background: linear-gradient(135deg, #3a3a3a, #1a1a1a);
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .success {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .steps-section {
+            margin-top: 40px;
+        }
+
+        .steps-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            border: 1px solid #666666;
+            border-radius: 12px;
+        }
+
+        .step-number {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(45deg, #ffffff, #cccccc);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-family: 'Orbitron', monospace;
+            color: #000000;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            color: #cccccc;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .glitch {
+            position: relative;
+            animation: glitch 2s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 12px;
+            }
+
+            .logo {
+                font-size: 32px;
+            }
+
+            .form-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo glitch">
+                БИЗНЕС ДРОП
+            </div>
+            <div class="subtitle">Генератор Бизнес-Идей на Основе ИИ</div>
+        </div>
+
+        <div class="telegram-section">
+            <div class="telegram-title">
+                <i class="fab fa-telegram"></i> Требуется Доступ
+            </div>
+            <div class="telegram-text">
+                Чтобы разблокировать всю мощь БИЗНЕС ДРОП, сначала подпишитесь на наш Telegram канал.
+            </div>
+            <a href="https://t.me/big_develop" target="_blank" class="telegram-btn">
+                <i class="fab fa-telegram"></i>
+                Подписаться на Канал
+            </a>
+            <div class="subscription-check">
+                <button class="check-btn" id="checkSubscription">
+                    <i class="fas fa-check"></i> Я Подписался
+                </button>
+            </div>
+        </div>
+
+        <div class="success" id="success">
+            <i class="fas fa-check-circle"></i> Подписка подтверждена! Теперь вы можете генерировать бизнес-идеи.
+        </div>
+
+        <div class="generations-counter" id="generationsCounter" style="display: none;">
+            <div class="counter-title">Осталось Генераций</div>
+            <div class="counter-value" id="counterValue">5</div>
+        </div>
+
+        <div class="promo-section" id="promoSection" style="display: none;">
+            <div class="promo-title">
+                <i class="fas fa-gift"></i> Промокод
+            </div>
+            <div class="promo-input-group">
+                <input type="text" class="promo-input" id="promoInput" placeholder="Введите промокод">
+                <button class="promo-btn" id="promoBtn">
+                    <i class="fas fa-unlock"></i> Применить
+                </button>
+            </div>
+            <div class="success" id="promoSuccess">
+                <i class="fas fa-check-circle"></i> Промокод применен! +5 генераций добавлено.
+            </div>
+            <div class="error" id="promoError">
+                <i class="fas fa-exclamation-triangle"></i> Неверный промокод.
+            </div>
+        </div>
+
+        <div class="form-section" id="formSection">
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-ruble-sign"></i> Начальный Бюджет (₽)
+                </label>
+                <input type="number" class="form-input" id="budget" placeholder="Введите ваш бюджет (например, 100000)" min="0">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-network-wired"></i> Тип Бизнеса
+                </label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="online" name="businessType" value="online" checked>
+                        <label for="online" class="radio-label">
+                            <i class="fas fa-laptop-code radio-icon"></i>
+                            <span class="radio-text">Онлайн</span>
+                        </label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="offline" name="businessType" value="offline">
+                        <label for="offline" class="radio-label">
+                            <i class="fas fa-store radio-icon"></i>
+                            <span class="radio-text">Офлайн</span>
+                        </label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="hybrid" name="businessType" value="hybrid">
+                        <label for="hybrid" class="radio-label">
+                            <i class="fas fa-globe-americas radio-icon"></i>
+                            <span class="radio-text">Смешанный</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-brain"></i> Ваши Навыки/Интересы
+                </label>
+                <input type="text" class="form-input" id="interests" placeholder="например: Программирование, Дизайн, Маркетинг, Криpto">
+            </div>
+        </div>
+
+        <div class="error" id="error"></div>
+
+        <button class="generate-btn" id="generateBtn" disabled>
+            <i class="fas fa-rocket"></i> Генерировать Идеи
+        </button>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">Обработка Нейронной Сети ИИ...</div>
+        </div>
+
+        <div class="results" id="results"></div>
+
+        <div class="steps-section">
+            <div class="steps-title">Системный Протокол</div>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-text">Подпишитесь на наш Telegram канал</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-text">Введите ваш бюджет и параметры бизнеса</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-text">ИИ генерирует 5 оптимизированных бизнес-стратегий</div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-text">Выполняйте и доминируйте на рынке</div>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-text">
+                    Если у вас есть вопросы, отправьте их в телеграм канал
+                    <br>
+                    <a href="https://t.me/big_develop" target="_blank" class="telegram-btn" style="margin-top: 10px; display: inline-flex;">
+                        <i class="fab fa-telegram"></i>
+                        Посмотреть канал
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Use the correct Gemini API endpoint
+        const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
+
+        let isSubscribed = false;
+        let generationsLeft = 5;
+        let usedPromoCodes = [];
+
+        // Valid promo codes (in real app, these would be on server)
+        const validPromoCodes = [
+          'SALE50OFF',
+          'NEW24USER',
+          'DISCOUNT2024',
+          'MEGA30CODE',
+          'VIP123ACCESS',
+          'FLASH45SALE',
+          'SHOPNOW99',
+          'WINTER25X',
+          'BONUS15CASH',
+          'GIFTCODE10',
+          'SUMMER2024X',
+          'LOYALTY50',
+          'HOTDEAL33',
+          'FREESHIP55',
+          'BLACKFRIDAY24',
+          'CYBER25MON',
+          'SPRING15OFF',
+          'GOLD20VIP',
+          'CASHBACK10',
+          'WIN100PRIZE',
+          'MARCH10CODE',
+          'APRIL20SALE',
+          'MAY30DAYS',
+          'JUNE5BONUS',
+          'JULY4FIRE',
+          'AUGUST15X',
+          'SEPTEMBER10',
+          'OCT22DEAL',
+          'NOV25SAVE',
+          'DEC30GIFT',
+          'HOLIDAY50X',
+          'NEWYEAR2025',
+          'VALENTINE14',
+          'EASTER2024',
+          'RAMADAN1445',
+          'CHRISTMAS25',
+          'BDAT10CODE',
+          'ANNIV30SALE',
+          'FIRST5ORDER',
+          'QUICK12CASH',
+          'MIRAX50OFF',
+          'TOP2024DEAL',
+          'EZSHOP15',
+          'FESTIVAL18X',
+          'HAPPY30SHOP',
+          'LUCKY7CODE',
+          'BIG50SALE',
+          'SMART10OFF',
+          'FAST25DELIV',
+          'LAST99CHANCE'
+        ];
+
+        // Load saved data from localStorage
+        function loadUserData() {
+            const saved = localStorage.getItem('бизнесДропДанные');
+            if (saved) {
+                const data = JSON.parse(saved);
+                generationsLeft = data.generationsLeft || 5;
+                usedPromoCodes = data.usedPromoCodes || [];
+                updateGenerationsDisplay();
+            }
+        }
+
+        // Save user data to localStorage
+        function saveUserData() {
+            const data = {
+                generationsLeft: generationsLeft,
+                usedPromoCodes: usedPromoCodes
+            };
+            localStorage.setItem('бизнесДропДанные', JSON.stringify(data));
+        }
+
+        // Update generations counter display
+        function updateGenerationsDisplay() {
+            document.getElementById('counterValue').textContent = generationsLeft;
+        }
+
+        document.getElementById('checkSubscription').addEventListener('click', checkSubscription);
+        document.getElementById('generateBtn').addEventListener('click', generateIdeas);
+        document.getElementById('promoBtn').addEventListener('click', applyPromoCode);
+
+        // Load user data on page load
+        loadUserData();
+
+        function checkSubscription() {
+            isSubscribed = true;
+            document.getElementById('success').style.display = 'block';
+            document.getElementById('formSection').classList.add('enabled');
+            document.getElementById('generateBtn').disabled = false;
+            document.getElementById('generationsCounter').style.display = 'block';
+            document.getElementById('promoSection').style.display = 'block';
+            
+            // Hide the telegram section after subscription
+            document.querySelector('.telegram-section').style.display = 'none';
+
+            updateGenerationsDisplay();
+
+            // Scroll to form
+            document.getElementById('formSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function applyPromoCode() {
+            const promoInput = document.getElementById('promoInput');
+            const promoCode = promoInput.value.trim().toUpperCase();
+            const promoSuccess = document.getElementById('promoSuccess');
+            const promoError = document.getElementById('promoError');
+
+            // Hide previous messages
+            promoSuccess.style.display = 'none';
+            promoError.style.display = 'none';
+
+            if (!promoCode) {
+                promoError.textContent = 'Пожалуйста, введите промокод';
+                promoError.style.display = 'block';
+                return;
+            }
+
+            if (usedPromoCodes.includes(promoCode)) {
+                promoError.textContent = 'Этот промокод уже был использован';
+                promoError.style.display = 'block';
+                return;
+            }
+
+            if (validPromoCodes.includes(promoCode)) {
+                generationsLeft += 5;
+                usedPromoCodes.push(promoCode);
+                saveUserData();
+                updateGenerationsDisplay();
+
+                promoSuccess.style.display = 'block';
+                promoInput.value = '';
+
+                setTimeout(() => {
+                    promoSuccess.style.display = 'none';
+                }, 3000);
+            } else {
+                promoError.style.display = 'block';
+                setTimeout(() => {
+                    promoError.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        async function generateIdeas() {
+            if (!isSubscribed) {
+                showError('Пожалуйста, сначала подпишитесь на Telegram канал!');
+                return;
+            }
+
+            if (generationsLeft <= 0) {
+                showError('Генерации закончились! Используйте промокод, чтобы получить больше.');
+                return;
+            }
+
+            const budget = document.getElementById('budget').value;
+            const businessType = document.querySelector('input[name="businessType"]:checked').value;
+            const interests = document.getElementById('interests').value;
+
+            // Validation
+            if (!budget || budget <= 0) {
+                showError('Введите корректную сумму бюджета');
+                return;
+            }
+
+            if (!interests.trim()) {
+                showError('Введите ваши навыки или интересы');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('generateBtn').disabled = true;
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('error').style.display = 'none';
+
+            try {
+                // Get API key from environment variable
+                const API_KEY = 'AIzaSyAPSl7kGWMBpHvPiQtnsgv4eDyRuReEYE4'; // In production, this should come from process.env
+
+                const prompt = `Создай 5 инновационных бизнес-идей на основе:
+                - Бюджет: ₽${budget}
+                - Тип: ${businessType}
+                - Навыки: ${interests}
+
+                Для каждой идеи предоставь:
+                1. Название бизнеса на русском языке
+                2. Описание (2-3 предложения)
+                3. ROI процент
+                4. Срок окупаемости в месяцах
+                5. Потенциальный месячный доход
+                6. Сумма первоначальных инвестиций
+
+                Формат JSON массив с полями: name, description, roi, breakEvenMonths, monthlyRevenue, initialInvestment. Только JSON, без дополнительного текста.`;
+
+                const response = await fetch(`${API_URL}?key=${API_KEY}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: prompt
+                            }]
+                        }]
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('API Error Details:', errorText);
+                    throw new Error(`Ошибка API: ${response.status}. Проверьте API ключ и доступность сервиса.`);
+                }
+
+                const data = await response.json();
+
+                if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+                    throw new Error('Неверная структура ответа API');
+                }
+
+                const generatedText = data.candidates[0].content.parts[0].text;
+
+                let jsonText = generatedText.trim();
+                if (jsonText.startsWith('```json')) {
+                    jsonText = jsonText.replace(/```json\n?/, '').replace(/\n?```$/, '');
+                }
+
+                const ideas = JSON.parse(jsonText);
+
+                // Decrease generations count and save
+                generationsLeft--;
+                saveUserData();
+                updateGenerationsDisplay();
+
+                displayResults(ideas);
+
+            } catch (error) {
+                console.error('Ошибка:', error);
+                
+                // If API fails, show demo results
+                if (error.message.includes('404') || error.message.includes('API')) {
+                    showError('Сервис ИИ временно недоступен. Показываем демонстрационные результаты:');
+                    
+                    // Generate demo business ideas
+                    const demoIdeas = generateDemoIdeas(budget, businessType, interests);
+                    
+                    setTimeout(() => {
+                        document.getElementById('error').style.display = 'none';
+                        displayResults(demoIdeas);
+                        generationsLeft--;
+                        saveUserData();
+                        updateGenerationsDisplay();
+                    }, 2000);
+                } else {
+                    showError(`Сбой системы ИИ: ${error.message}. Пожалуйста, попробуйте снова.`);
+                }
+            } finally {
+                document.getElementById('generateBtn').disabled = false;
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        function displayResults(ideas) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+
+            ideas.forEach((idea, index) => {
+                const card = document.createElement('div');
+                card.className = 'idea-card';
+                card.innerHTML = `
+                    <div class="idea-number">${index + 1}</div>
+                    <div class="idea-title">
+                        <i class="fas fa-microchip"></i> ${idea.name}
+                    </div>
+                    <div class="idea-description">${idea.description}</div>
+                    <div class="idea-metrics">
+                        <div class="metric">
+                            <div class="metric-label">ROI</div>
+                            <div class="metric-value">${idea.roi}</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Окупаемость</div>
+                            <div class="metric-value">${idea.breakEvenMonths}М</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Доход/Месяц</div>
+                            <div class="metric-value">₽${idea.monthlyRevenue}</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Инвестиции</div>
+                            <div class="metric-value">₽${idea.initialInvestment}</div>
+                        </div>
+                    </div>
+                    <button class="details-btn" onclick="getAIDetails(${index})">
+                        <i class="fas fa-robot"></i> Получить AI Анализ
+                    </button>
+                    <div class="idea-details" id="details-${index}">
+                        <div class="detail-section">
+                            <div class="detail-title">📈 Бизнес-план</div>
+                            <div class="detail-content">${idea.businessPlan}</div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-title">🎯 Целевая аудитория</div>
+                            <div class="detail-content">${idea.targetAudience}</div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-title">📊 Стратегия маркетинга</div>
+                            <div class="detail-content">${idea.marketingStrategy}</div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-title">⚠️ Основные риски</div>
+                            <ul class="detail-list">
+                                ${(idea.risks || []).map(risk => `<li>${risk}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-title">🚀 Первые шаги</div>
+                            <ul class="detail-list">
+                                ${(idea.firstSteps || []).map(step => `<li>${step}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                resultsDiv.appendChild(card);
+            });
+
+            resultsDiv.style.display = 'block';
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function getDifficultyText(difficulty) {
+            switch(difficulty) {
+                case 'easy': return 'Легко';
+                case 'normal': return 'Средне';
+                case 'hard': return 'Сложно';
+                default: return 'Средне';
+            }
+        }
+
+        async function getAIDetails(index) {
+            const details = document.getElementById(`details-${index}`);
+            const btn = details.previousElementSibling;
+            
+            if (details.classList.contains('show')) {
+                details.classList.remove('show');
+                btn.innerHTML = '<i class="fas fa-robot"></i> Получить AI Анализ';
+                return;
+            }
+
+            // Show loading state
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> AI анализирует...';
+            btn.disabled = true;
+
+            // Get the idea data
+            const card = btn.closest('.idea-card');
+            const ideaTitle = card.querySelector('.idea-title').textContent.replace('🤖 ', '').trim();
+            const ideaDescription = card.querySelector('.idea-description').textContent;
+
+            try {
+                const API_KEY = 'AIzaSyAPSl7kGWMBpHvPiQtnsgv4eDyRuReEYE4';
+                const prompt = `Проведи глубокий анализ бизнес-идеи "${ideaTitle}": ${ideaDescription}
+
+                Предоставь детальную информацию:
+                1. Расширенный бизнес-план (3-4 предложения)
+                2. Целевая аудитория (конкретные сегменты)
+                3. Стратегия маркетинга (конкретные каналы и методы)
+                4. 3-4 основных риска
+                5. 4-5 первых шагов для реализации
+                6. 2-3 похожие или связанные бизнес-идеи
+
+                Отвечай на русском языке в формате JSON:
+                {
+                    "businessPlan": "...",
+                    "targetAudience": "...",
+                    "marketingStrategy": "...",
+                    "risks": ["...", "...", "..."],
+                    "firstSteps": ["...", "...", "...", "..."],
+                    "relatedIdeas": ["...", "...", "..."]
+                }`;
+
+                const response = await fetch(`${API_URL}?key=${API_KEY}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: prompt
+                            }]
+                        }]
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('API недоступен');
+                }
+
+                const data = await response.json();
+                const generatedText = data.candidates[0].content.parts[0].text;
+
+                let jsonText = generatedText.trim();
+                if (jsonText.startsWith('```json')) {
+                    jsonText = jsonText.replace(/```json\n?/, '').replace(/\n?```$/, '');
+                }
+
+                const aiAnalysis = JSON.parse(jsonText);
+
+                // Update the details section with AI analysis
+                details.innerHTML = `
+                    <div class="detail-section">
+                        <div class="detail-title">🤖 AI Бизнес-план</div>
+                        <div class="detail-content">${aiAnalysis.businessPlan}</div>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">🎯 Целевая аудитория</div>
+                        <div class="detail-content">${aiAnalysis.targetAudience}</div>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">📊 Стратегия маркетинга</div>
+                        <div class="detail-content">${aiAnalysis.marketingStrategy}</div>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">⚠️ Основные риски</div>
+                        <ul class="detail-list">
+                            ${aiAnalysis.risks.map(risk => `<li>${risk}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">🚀 Первые шаги</div>
+                        <ul class="detail-list">
+                            ${aiAnalysis.firstSteps.map(step => `<li>${step}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">💡 Похожие идеи</div>
+                        <ul class="detail-list">
+                            ${aiAnalysis.relatedIdeas.map(idea => `<li>${idea}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+
+                details.classList.add('show');
+                btn.innerHTML = '<i class="fas fa-eye-slash"></i> Скрыть AI анализ';
+
+            } catch (error) {
+                console.error('AI Error:', error);
+                
+                // Fallback to demo content
+                details.innerHTML = `
+                    <div class="detail-section">
+                        <div class="detail-title">🤖 AI Бизнес-план</div>
+                        <div class="detail-content">Подробный план развития бизнеса "${ideaTitle}" включает поэтапное масштабирование с фокусом на клиентский опыт и устойчивый рост доходов.</div>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">🎯 Целевая аудитория</div>
+                        <div class="detail-content">Основные клиенты: активные пользователи интернета 25-45 лет, готовые платить за качественные решения и экономить время.</div>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">📊 Стратегия маркетинга</div>
+                        <div class="detail-content">Многоканальный подход: SEO, контент-маркетинг, социальные сети, партнерские программы и реферальная система.</div>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">⚠️ Основные риски</div>
+                        <ul class="detail-list">
+                            <li>Высокая конкуренция на рынке</li>
+                            <li>Изменения в алгоритмах поисковых систем</li>
+                            <li>Экономическая нестабильность</li>
+                            <li>Технические сложности масштабирования</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">🚀 Первые шаги</div>
+                        <ul class="detail-list">
+                            <li>Провести детальное исследование рынка</li>
+                            <li>Создать минимально жизнеспособный продукт (MVP)</li>
+                            <li>Найти первых тестовых клиентов</li>
+                            <li>Настроить аналитику и метрики</li>
+                            <li>Запустить пилотную рекламную кампанию</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <div class="detail-title">💡 Похожие идеи</div>
+                        <ul class="detail-list">
+                            <li>Создание мобильного приложения в той же нише</li>
+                            <li>Франчайзинговая модель для масштабирования</li>
+                            <li>B2B версия продукта для корпоративных клиентов</li>
+                        </ul>
+                    </div>
+                `;
+                details.classList.add('show');
+                btn.innerHTML = '<i class="fas fa-eye-slash"></i> Скрыть AI анализ';
+            }
+
+            btn.disabled = false;
+        }
+
+        function generateDemoIdeas(budget, businessType, interests) {
+            const demoIdeas = [
+                {
+                    name: "Цифровая Консультационная Платформа",
+                    description: "Онлайн-платформа для консультаций в области ваших навыков. Предоставляйте экспертные знания клиентам через видеозвонки и чат.",
+                    roi: "250%",
+                    breakEvenMonths: 4,
+                    monthlyRevenue: Math.floor(budget * 0.3),
+                    initialInvestment: Math.floor(budget * 0.2),
+                    difficulty: "easy",
+                    businessPlan: "Создание платформы для онлайн-консультаций с интеграцией видеозвонков, чата и системы бронирования. Монетизация через комиссию 15-20% с каждой консультации.",
+                    targetAudience: "Люди, нуждающиеся в экспертных консультациях в вашей области знаний. Возраст 25-45 лет, готовы платить за качественные советы.",
+                    marketingStrategy: "SEO-оптимизация, контент-маркетинг через блог, партнерства с профильными сообществами, реклама в социальных сетях.",
+                    risks: ["Высокая конкуренция", "Зависимость от экспертов", "Сложность привлечения первых клиентов"],
+                    firstSteps: ["Создать MVP платформы", "Найти 3-5 экспертов", "Запустить бета-тестирование", "Настроить систему платежей"]
+                },
+                {
+                    name: "Автоматизированный Сервис",
+                    description: "Создание автоматизированного решения для решения проблем в вашей области интересов с использованием современных технологий.",
+                    roi: "180%",
+                    breakEvenMonths: 6,
+                    monthlyRevenue: Math.floor(budget * 0.25),
+                    initialInvestment: Math.floor(budget * 0.3),
+                    difficulty: "normal",
+                    businessPlan: "Разработка SaaS-решения с использованием ИИ и автоматизации для оптимизации бизнес-процессов клиентов. Подписочная модель от ₽2000/месяц.",
+                    targetAudience: "Малый и средний бизнес, стартапы, фрилансеры. Компании с 5-50 сотрудниками, готовые инвестировать в автоматизацию.",
+                    marketingStrategy: "B2B маркетинг, участие в отраслевых конференциях, демо-версии, кейс-стади, LinkedIn реклама.",
+                    risks: ["Технические сложности", "Долгий цикл продаж", "Необходимость постоянного обновления"],
+                    firstSteps: ["Исследовать рынок", "Создать прототип", "Найти пилотных клиентов", "Разработать MVP"]
+                },
+                {
+                    name: "Образовательная Платформа",
+                    description: "Онлайн-курсы и обучающие материалы по вашим навыкам. Монетизация через подписки и продажу курсов.",
+                    roi: "320%",
+                    breakEvenMonths: 5,
+                    monthlyRevenue: Math.floor(budget * 0.4),
+                    initialInvestment: Math.floor(budget * 0.25),
+                    difficulty: "easy",
+                    businessPlan: "Создание платформы с видеокурсами, интерактивными заданиями и сертификацией. Модель: разовые покупки курсов + премиум подписка.",
+                    targetAudience: "Студенты, профессионалы, желающие повысить квалификацию. Возраст 18-40 лет, мотивированы к обучению.",
+                    marketingStrategy: "YouTube канал, бесплатные мини-курсы, партнерства с блогерами, email-маркетинг, реклама в Google и Яндекс.",
+                    risks: ["Высокая конкуренция", "Необходимость качественного контента", "Пиратство контента"],
+                    firstSteps: ["Создать первый курс", "Выбрать платформу", "Запустить пилотную группу", "Собрать отзывы"]
+                },
+                {
+                    name: "SaaS Решение",
+                    description: "Программное обеспечение как услуга для решения специфических задач в вашей области. Подписочная модель.",
+                    roi: "400%",
+                    breakEvenMonths: 8,
+                    monthlyRevenue: Math.floor(budget * 0.5),
+                    initialInvestment: Math.floor(budget * 0.4),
+                    difficulty: "hard",
+                    businessPlan: "Разработка специализированного SaaS-продукта с многоуровневым ценообразованием. Стартовый план от ₽5000/месяц, корпоративный - от ₽50000/месяц.",
+                    targetAudience: "Средние и крупные компании, IT-отделы, менеджеры проектов. B2B сегмент с бюджетом на софт от ₽100000/год.",
+                    marketingStrategy: "Account-based marketing, отраслевые выставки, webinars, case studies, LinkedIn outreach, cold sales.",
+                    risks: ["Высокие затраты на разработку", "Долгий sales cycle", "Сильная конкуренция", "Техническая поддержка"],
+                    firstSteps: ["Валидировать идею", "Собрать команду разработки", "Создать MVP", "Найти инвесторов"]
+                },
+                {
+                    name: "Маркетплейс Услуг",
+                    description: "Платформа для соединения специалистов с клиентами в вашей области. Комиссия с каждой сделки.",
+                    roi: "200%",
+                    breakEvenMonths: 7,
+                    monthlyRevenue: Math.floor(budget * 0.35),
+                    initialInvestment: Math.floor(budget * 0.35),
+                    difficulty: "normal",
+                    businessPlan: "Двусторонний маркетплейс с системой рейтингов, безопасными платежами и арбитражем споров. Комиссия 10-15% с каждой сделки.",
+                    targetAudience: "С одной стороны - специалисты-фрилансеры, с другой - клиенты, ищущие услуги. Фокус на качество и доверие.",
+                    marketingStrategy: "Двусторонний маркетинг: привлечение исполнителей через профильные сообщества, клиентов - через рекламу и SEO.",
+                    risks: ["Chicken-egg проблема", "Управление качеством", "Споры между сторонами", "Конкуренция с Avito/YouDo"],
+                    firstSteps: ["Определить нишу", "Привлечь первых исполнителей", "Создать базовый функционал", "Запустить в одном городе"]
+                }
+            ];
+
+            // Ensure all objects have required properties
+            return demoIdeas.map(idea => ({
+                ...idea,
+                risks: idea.risks || [],
+                firstSteps: idea.firstSteps || [],
+                businessPlan: idea.businessPlan || "",
+                targetAudience: idea.targetAudience || "",
+                marketingStrategy: idea.marketingStrategy || ""
+            }));
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${message}`;
+            errorDiv.style.display = 'block';
+            errorDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Cyberpunk text effects
+        setInterval(() => {
+            const elements = document.querySelectorAll('.glitch');
+            elements.forEach(el => {
+                if (Math.random() < 0.1) {
+                    el.style.textShadow = `
+                        ${Math.random() * 10 - 5}px 0 #ffffff,
+                        ${Math.random() * 10 - 5}px 0 #cccccc
+                    `;
+                    setTimeout(() => {
+                        el.style.textShadow = '0 0 30px rgba(255, 255, 255, 0.3)';
+                    }, 100);
+                }
+            });
+        }, 2000);
+    </script>
+</body>
+</html>
